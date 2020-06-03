@@ -1,11 +1,11 @@
 package com.utek.android.utekapp.homeguest
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 
 import com.utek.android.utekapp.R
 import com.utek.android.utekapp.databinding.FragmentHomeGuestBinding
@@ -22,7 +22,19 @@ class HomeGuest : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentHomeGuestBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_home_guest, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.account_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            view!!.findNavController()
+        ) || super.onOptionsItemSelected(item)
+    }
 }
