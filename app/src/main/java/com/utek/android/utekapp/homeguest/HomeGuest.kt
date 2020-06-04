@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 
 import com.utek.android.utekapp.R
+import com.utek.android.utekapp.databinding.AppmemberViewItemBinding
 import com.utek.android.utekapp.databinding.FragmentHomeGuestBinding
 
 /**
@@ -25,13 +26,15 @@ class HomeGuest : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentHomeGuestBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_home_guest, container, false)
+        val binding= FragmentHomeGuestBinding.inflate(inflater)
+
         setHasOptionsMenu(true)
 
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
+
+        binding.memberItem.adapter = MemberItemAdapter()
 
         return binding.root
     }

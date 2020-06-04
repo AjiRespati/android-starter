@@ -23,7 +23,7 @@ private val retrofit = Retrofit.Builder()
 interface GetAppListService {
     @GET("realestate")
     fun getAppListAsync():
-            Deferred<List<AppListProperty>>
+            Deferred<List<AppMember>>
 }
 
 object AppListRequest {
