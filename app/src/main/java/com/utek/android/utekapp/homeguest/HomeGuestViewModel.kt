@@ -10,10 +10,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+enum class AppListStatus { LOADING, ERROR, DONE }
+
 class HomeGuestViewModel : ViewModel() {
 
-    private val _status = MutableLiveData<String>()
-    val status: LiveData<String>
+    private val _status = MutableLiveData<AppListStatus>()
+    val status: LiveData<AppListStatus>
         get() = _status
 
     private val _appMembers = MutableLiveData<List<AppMember>>()
@@ -31,13 +33,13 @@ class HomeGuestViewModel : ViewModel() {
         coroutineScope.launch {
             val getListRequestDeffered = AppListRequest.RETROFIT_SERVICE_GET.getAppListAsync()
             try {
+                _status.value = AppListStatus.LOADING
                 val listResult = getListRequestDeffered.await()
-                _status.value = "Success retrieved  ${listResult.size} data"
-                if (listResult.size > 1) {
-                    _appMembers.value = listResult
-                }
+                _status.value = AppListStatus.DONE
+                _appMembers.value = listResult
             } catch (t: Exception) {
-                _status.value = "Failure: " + t.message
+                _status.value = AppListStatus.ERROR
+                _appMembers.value = ArrayList()
             }
         }
     }

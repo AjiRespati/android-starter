@@ -1,11 +1,13 @@
 package com.utek.android.utekapp
 
+import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.utek.android.utekapp.homeguest.AppListStatus
 import com.utek.android.utekapp.homeguest.MemberItemAdapter
 import com.utek.android.utekapp.network.AppMember
 
@@ -26,5 +28,22 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.ic_broken_image))
             .into(imgView)
+    }
+}
+
+@BindingAdapter("appListStatus")
+fun bindStatus(statusImageView: ImageView, status: AppListStatus?) {
+    when (status) {
+        AppListStatus.LOADING -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.loading_animation)
+        }
+        AppListStatus.ERROR -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.ic_connection_error)
+        }
+        AppListStatus.DONE -> {
+            statusImageView.visibility = View.GONE
+        }
     }
 }

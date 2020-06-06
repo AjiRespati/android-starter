@@ -10,4 +10,5 @@
     <string name="your_channel_text">Your channel</string>
     <string name="account_text">Account</string>
     <string name="app_member_image">app member image</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
 </resources>
