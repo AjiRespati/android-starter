@@ -5,4 +5,6 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="colorWhite">@android:color/white</color>
     <color name="pureWhite">#FFFFFF</color>
+    <color name="appBackground">#FAFAFA</color>
+    <color name="lightGrey">#D3D3D3</color>
 </resources>
