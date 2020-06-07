@@ -22,6 +22,12 @@ class HomeGuestViewModel : ViewModel() {
     val appMembers: LiveData<List<AppMember>>
         get() = _appMembers
 
+    private val _navigateToSelectedAppMember = MutableLiveData<AppMember>()
+
+    // The external immutable LiveData for the navigation property
+    val navigateToSelectedAppMember: LiveData<AppMember>
+        get() = _navigateToSelectedAppMember
+
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -42,6 +48,14 @@ class HomeGuestViewModel : ViewModel() {
                 _appMembers.value = ArrayList()
             }
         }
+    }
+
+    fun displayAppMemberDetails(appMember: AppMember){
+        _navigateToSelectedAppMember.value = appMember
+    }
+
+    fun displayAppMemberDetailsComplete(){
+        _navigateToSelectedAppMember.value = null
     }
 
     override fun onCleared() {

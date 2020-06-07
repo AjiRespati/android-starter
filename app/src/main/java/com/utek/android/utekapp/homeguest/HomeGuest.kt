@@ -3,13 +3,12 @@ package com.utek.android.utekapp.homeguest
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-
 import com.utek.android.utekapp.R
-import com.utek.android.utekapp.databinding.AppmemberViewItemBinding
 import com.utek.android.utekapp.databinding.FragmentHomeGuestBinding
 
 /**
@@ -17,24 +16,34 @@ import com.utek.android.utekapp.databinding.FragmentHomeGuestBinding
  */
 class HomeGuest : Fragment() {
 
-    private val viewModel: HomeGuestViewModel by lazy {
-        ViewModelProviders.of(this).get(HomeGuestViewModel::class.java)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val binding= FragmentHomeGuestBinding.inflate(inflater)
 
-        setHasOptionsMenu(true)
+        val viewModel: HomeGuestViewModel by lazy {
+            ViewModelProvider(this).get(HomeGuestViewModel::class.java)
+        }
+
+        val binding = FragmentHomeGuestBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
 
-        binding.memberItem.adapter = MemberItemAdapter()
+        binding.memberItem.adapter = MemberItemAdapter(MemberItemAdapter.OnClickListener {
+            viewModel.displayAppMemberDetails(it)
+        })
+
+        viewModel.navigateToSelectedAppMember.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                this.findNavController().navigate(HomeGuestDirections.actionHomeGuestToAppMemberDetailFragment(it))
+                viewModel.displayAppMemberDetailsComplete()
+            }
+        })
+
+        setHasOptionsMenu(true)
 
         return binding.root
     }

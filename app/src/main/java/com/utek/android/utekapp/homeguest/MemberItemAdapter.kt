@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utek.android.utekapp.databinding.AppmemberViewItemBinding
 import com.utek.android.utekapp.network.AppMember
 
-class MemberItemAdapter : ListAdapter<AppMember, MemberItemAdapter.AppMemberViewHolder>(DiffCallback) {
+class MemberItemAdapter(val onClickListener: OnClickListener) :
+    ListAdapter<AppMember, MemberItemAdapter.AppMemberViewHolder>(DiffCallback) {
     class AppMemberViewHolder(private var binding: AppmemberViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(appMember: AppMember) {
@@ -36,7 +37,16 @@ class MemberItemAdapter : ListAdapter<AppMember, MemberItemAdapter.AppMemberView
 
     override fun onBindViewHolder(holder: AppMemberViewHolder, position: Int) {
         val appMember = getItem(position)
+
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(appMember)
+        }
+
         holder.bind(appMember)
+    }
+
+    class OnClickListener(val clickListener: (appMember: AppMember) -> Unit) {
+        fun onClick(appMember: AppMember) = clickListener(appMember)
     }
 
 }
