@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.utek.android.utekapp.R
+import com.utek.android.utekapp.database.UtekAppDatabase
 import com.utek.android.utekapp.databinding.FragmentHomeGuestBinding
 
 /**
@@ -22,8 +23,14 @@ class HomeGuest : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val application = requireNotNull(this.activity).application
+
+        val userDataSource = UtekAppDatabase.getInstance(application).userInfoDao
+
+        val viewModelFactory = HomeGuestViewModelFactory(userDataSource, application)
+
         val viewModel: HomeGuestViewModel by lazy {
-            ViewModelProvider(this).get(HomeGuestViewModel::class.java)
+            ViewModelProvider(this, viewModelFactory).get(HomeGuestViewModel::class.java)
         }
 
         val binding = FragmentHomeGuestBinding.inflate(inflater)
@@ -40,6 +47,15 @@ class HomeGuest : Fragment() {
             if (it != null) {
                 this.findNavController().navigate(HomeGuestDirections.actionHomeGuestToAppMemberDetailFragment(it))
                 viewModel.displayAppMemberDetailsComplete()
+            }
+        })
+
+        viewModel.navigateToSignIn.observe(viewLifecycleOwner, Observer {
+            if (it) {
+
+                // TODO navigate to signIn page
+
+                viewModel.navigateToSignInComplete()
             }
         })
 
