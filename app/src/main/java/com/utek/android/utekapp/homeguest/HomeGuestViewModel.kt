@@ -66,16 +66,15 @@ class HomeGuestViewModel(val database: UserInfoDao, application: Application) : 
         coroutineScope.launch {
             Log.i("TEST","DIPANGGILKAH...?")
             userInfo = getUserInfoFromDatabase()
-            if (userInfo == null) {
-                _navigateToSignIn.value = true
-                Log.i("TEST","userInfo null, $userInfo ")
-                // sementara biar muncul kegiatan
-                _navigateToSelectedAppMember.value = appMember
-            }
-            else {
-                Log.i("TEST","DIPANGGIL KESINIKAH...? ${userInfo!!.id}")
-                _navigateToSelectedAppMember.value = appMember
-            }
+            _navigateToSelectedAppMember.value = appMember
+
+//            if (userInfo == null) {
+//                _navigateToSignIn.value = true
+//            }
+//            else {
+//                Log.i("TEST","DIPANGGIL KESINIKAH...? ${userInfo!!.id}")
+//                _navigateToSelectedAppMember.value = appMember
+//            }
         }
     }
 

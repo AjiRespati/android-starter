@@ -11,4 +11,6 @@
     <string name="account_text">Account</string>
     <string name="app_member_image">app member image</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</string>
+    <string name="phone_or_email_or_username">Phone or Email or Username</string>
+    <string name="password_text">Password</string>
 </resources>

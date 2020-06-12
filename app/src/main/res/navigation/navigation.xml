@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeGuest_to_appMemberDetailFragment"
             app:destination="@id/appMemberDetailFragment" />
+        <action
+            android:id="@+id/action_homeGuest_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
 
     <fragment
@@ -32,5 +35,10 @@
             app:argType="com.utek.android.utekapp.network.AppMember" />
 
     </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.utek.android.utekapp.screen.signin.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" />
 
 </navigation>

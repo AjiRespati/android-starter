@@ -52,9 +52,7 @@ class HomeGuest : Fragment() {
 
         viewModel.navigateToSignIn.observe(viewLifecycleOwner, Observer {
             if (it) {
-
-                // TODO navigate to signIn page
-
+                this.findNavController().navigate(HomeGuestDirections.actionHomeGuestToSignInFragment())
                 viewModel.navigateToSignInComplete()
             }
         })

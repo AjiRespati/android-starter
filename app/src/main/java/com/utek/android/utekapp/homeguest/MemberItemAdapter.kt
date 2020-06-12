@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.utek.android.utekapp.databinding.AppmemberViewItemBinding
 import com.utek.android.utekapp.network.AppMember
 
-class MemberItemAdapter(val onClickListener: OnClickListener) :
+class MemberItemAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<AppMember, MemberItemAdapter.AppMemberViewHolder>(DiffCallback) {
     class AppMemberViewHolder(private var binding: AppmemberViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
