@@ -5,7 +5,9 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.utek.android.utekapp.databinding.ActivityMainBinding
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         val navController = this.findNavController(R.id.navHostFragment)
         NavigationUI.setupActionBarWithNavController(this, navController)
+        bottom_navigation.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
